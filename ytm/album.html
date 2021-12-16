@@ -3,7 +3,10 @@
     </head>
     <body>
         <script>
-            console.log(window.location.search);
+            if(window.location.search.substr(1).split('=')[0] == "album")
+                window.location.replace("https://youtube.music.com/browse/" + window.location.search.substr(1).split('=')[1]);
+            if (window.location.search.substr(1).split('=')[0] == "channel")
+                window.location.replace("https://youtube.music.com/channel/" + window.location.search.substr(1).split('=')[1]);
         </script>
     </body>
 </html>
