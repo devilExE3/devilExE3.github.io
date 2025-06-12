@@ -267,7 +267,7 @@ function update_recipe_lines()
 }
 
 // arrange recipe layers
-setTimeout(() => {
+function loaded() {
     var layers = [];
     var max_shelfs = 0;
     while(recipe_render.length > 0)
@@ -314,7 +314,7 @@ setTimeout(() => {
         moveAll(0, ((total_layers * layer_width) / ar - total_height) / 2 * old_zoom);
     }
     update_recipe_lines();
-}, 50);
+}
 
 /*
     --v1: 4rem;
@@ -407,3 +407,53 @@ if (document.addEventListener) {
     window.event.returnValue = false;
   });
 }
+
+function awaitImages() {
+    var allImgsLength = 0;
+    var allImgsLoaded = 0;
+    var allImgs = [];
+
+    var filtered = Array.prototype.filter.call(document.querySelectorAll('img'), function (item) {
+        if (item.src === '') {
+            return false;
+        }
+
+        // Firefox's `complete` property will always be `true` even if the image has not been downloaded.
+        // Doing it this way works in Firefox.
+        var img = new Image();
+        img.src = item.src;
+        return !img.complete;
+    });
+
+    filtered.forEach(function (item) {
+        allImgs.push({
+            src: item.src,
+            element: item
+        });
+    });
+
+    allImgsLength = allImgs.length;
+    allImgsLoaded = 0;
+
+    // If no images found, don't bother.
+    if (allImgsLength === 0) {
+        callback.call(element);
+    }
+
+    allImgs.forEach(function (img) {
+        var image = new Image();
+
+        // Handle the image loading and error with the same callback.
+        image.addEventListener('load', function () {
+            allImgsLoaded++;
+
+            if (allImgsLoaded === allImgsLength) {
+                loaded();
+                return false;
+            }
+        });
+
+        image.src = img.src;
+    });
+}
+awaitImages();
