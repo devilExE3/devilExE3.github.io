@@ -437,7 +437,7 @@ function awaitImages() {
 
     // If no images found, don't bother.
     if (allImgsLength === 0) {
-        callback.call(element);
+        loaded();
     }
 
     allImgs.forEach(function (img) {
