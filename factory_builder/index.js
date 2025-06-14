@@ -29,7 +29,8 @@ const recipe_type_to_block = {
     "crafter_2": "crafting_table",
     "crafter_3": "crafter",
     "crusher": "smoker",
-    "enchanter": "enchanting_table"
+    "enchanter": "enchanting_table",
+    "explosive_furnace": "furnace"
 }
 var recipe_lines = [];
 
