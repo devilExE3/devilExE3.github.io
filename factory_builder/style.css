@@ -81,6 +81,18 @@ img {
 .crafter_3 .block {
     transform: translateY(var(--v5));
 }
+.crafter_5 .block {
+    transform: translateY(var(--v4));
+}
+.crafter_5 .row_1 {
+    display: flex;
+    flex-direction: row;
+}
+.crafter_5 .row_2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
 .crusher {
     padding-top: var(--v12);
